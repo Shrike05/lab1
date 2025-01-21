@@ -6,8 +6,8 @@ public class Car implements Movable{
     protected double currentSpeed; // The current speed of the car
     protected Color color; // Color of the car
     public String modelName; // The car model name
-    protected int x;
-    protected int y;
+    protected float x;
+    protected float y;
     protected float angle;
     
     public int getNrDoors(){
