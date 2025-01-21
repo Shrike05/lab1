@@ -47,14 +47,38 @@ public class Car implements Movable{
     public void decrementSpeed(double amount){
     }
     
-    // TODO fix this method according to lab pm
-    public void gas(double amount){
+    public void gas(double amount) {
+        //Constrain amount between 0 and 1
+        amount = Math.max(Math.min(amount, 1), 0);
+
+        double oldSpeed = currentSpeed;
         incrementSpeed(amount);
+
+        //If the currentSpeed decreased
+        //Then reset it to the old speed because it is not allowed to decrease
+        if(currentSpeed < oldSpeed){
+            currentSpeed = oldSpeed;
+        }
+        
+        //Constrain currentSpeed between 0 and enginePower
+        currentSpeed = Math.max(Math.min(currentSpeed, enginePower), 0);
     }
 
-    // TODO fix this method according to lab pm
     public void brake(double amount){
+        //Constrain amount between 0 and 1
+        amount = Math.max(Math.min(amount, 1), 0);
+
+        double oldSpeed = currentSpeed;
         decrementSpeed(amount);
+
+        //If the currentSpeed increased
+        //Then reset it to the old speed because it is not allowed to increase
+        if(currentSpeed > oldSpeed){
+            currentSpeed = oldSpeed;
+        }
+        
+        //Constrain currentSpeed between 0 and enginePower
+        currentSpeed = Math.max(Math.min(currentSpeed, enginePower), 0);
     }
 
     public void move(){
