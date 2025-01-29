@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Car implements Movable{
+public abstract class Car implements Movable{
     protected int nrDoors; // Number of doors on the car
     protected double enginePower; // Engine power of the car
     protected double currentSpeed; // The current speed of the car
@@ -42,43 +42,27 @@ public class Car implements Movable{
     }
 
     public void incrementSpeed(double amount){
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
     }
 
     public void decrementSpeed(double amount){
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
     
     public void gas(double amount) {
-        //Constrain amount between 0 and 1
-        amount = Math.max(Math.min(amount, 1), 0);
-
-        double oldSpeed = currentSpeed;
-        incrementSpeed(amount);
-
-        //If the currentSpeed decreased
-        //Then reset it to the old speed because it is not allowed to decrease
-        if(currentSpeed < oldSpeed){
-            currentSpeed = oldSpeed;
+        if(amount > 1 || amount < 0){
+            throw new IllegalArgumentException("Amount must be in the range [0,1]");
         }
-        
-        //Constrain currentSpeed between 0 and enginePower
-        currentSpeed = Math.max(Math.min(currentSpeed, enginePower), 0);
+
+        incrementSpeed(amount);
     }
 
     public void brake(double amount){
-        //Constrain amount between 0 and 1
-        amount = Math.max(Math.min(amount, 1), 0);
-
-        double oldSpeed = currentSpeed;
-        decrementSpeed(amount);
-
-        //If the currentSpeed increased
-        //Then reset it to the old speed because it is not allowed to increase
-        if(currentSpeed > oldSpeed){
-            currentSpeed = oldSpeed;
+        if(amount > 1 || amount < 0){
+            throw new IllegalArgumentException("Amount must be in the range [0,1]");
         }
-        
-        //Constrain currentSpeed between 0 and enginePower
-        currentSpeed = Math.max(Math.min(currentSpeed, enginePower), 0);
+
+        decrementSpeed(amount);
     }
 
     public void move(){
