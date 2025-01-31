@@ -1,5 +1,6 @@
 import java.awt.*;
 
+
 public abstract class Car implements Movable{
     protected int nrDoors; // Number of doors on the car
     protected double enginePower; // Engine power of the car
@@ -41,11 +42,11 @@ public abstract class Car implements Movable{
         return 0;
     }
 
-    public void incrementSpeed(double amount){
+    private void incrementSpeed(double amount){
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
     }
 
-    public void decrementSpeed(double amount){
+    private void decrementSpeed(double amount){
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
     
@@ -71,10 +72,10 @@ public abstract class Car implements Movable{
     }
 
     public void turnLeft(){
-        angle += 90;
+        angle += Math.PI/4;
     }
 
     public void turnRight(){
-        angle -= 90;
+        angle -= Math.PI/4;
     }
 }

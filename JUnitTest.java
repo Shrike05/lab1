@@ -23,28 +23,6 @@ public class JUnitTest {
     }
 
     @Test
-    public void testSpeedOnGas() {
-        for(int i = 0; i < 100; i++){
-            volvo.gas(1);
-            saab.gas(1);
-        }
-        
-        assertEquals(true, volvo.currentSpeed <= volvo.enginePower && volvo.currentSpeed >= 0);
-        assertEquals(true, saab.currentSpeed <= saab.enginePower && saab.currentSpeed >= 0);
-    }
-
-    @Test
-    public void testSpeedOnBrake() {
-        for(int i = 0; i < 100; i++){
-            volvo.brake(1);
-            saab.brake(1);
-        }
-        
-        assertEquals(volvo.currentSpeed <= 1 && volvo.currentSpeed >= 0, true);
-        assertEquals(saab.currentSpeed <= 1 && saab.currentSpeed >= 0, true);
-    }
-
-    @Test
     public void testBrake() {
         assertThrows(IllegalArgumentException.class, () -> saab.brake(100));
         assertThrows(IllegalArgumentException.class, () -> volvo.brake(100));
@@ -60,6 +38,28 @@ public class JUnitTest {
 
         assertThrows(IllegalArgumentException.class, () -> saab.gas(-1));
         assertThrows(IllegalArgumentException.class, () -> volvo.gas(-1));
+    }
+
+    @Test
+    public void testGasLowers() {
+        double oldVolvoSpeed = volvo.currentSpeed;
+        volvo.gas(1);
+        assertEquals(true, volvo.currentSpeed >= oldVolvoSpeed);
+
+        double oldSaabSpeed = saab.currentSpeed;
+        saab.gas(1);
+        assertEquals(true, saab.currentSpeed >= oldSaabSpeed);
+    }
+
+    @Test
+    public void testBrakeHigher() {
+        double oldVolvoSpeed = volvo.currentSpeed;
+        volvo.brake(1);
+        assertEquals(true, volvo.currentSpeed <= oldVolvoSpeed);
+
+        double oldSaabSpeed = saab.currentSpeed;
+        saab.brake(1);
+        assertEquals(true, saab.currentSpeed <= oldSaabSpeed);
     }
 
     @Test
