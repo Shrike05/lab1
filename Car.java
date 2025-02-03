@@ -38,7 +38,7 @@ public abstract class Car implements Movable{
 	    currentSpeed = 0;
     }
     
-    public double speedFactor(){
+    protected double speedFactor(){
         return 0;
     }
 
