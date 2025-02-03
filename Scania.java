@@ -17,7 +17,7 @@ public class Scania extends Car {
         return deckAngleDeg;
     }
 
-    private void heightenDeck(){
+    public void heightenDeck(){
         if(currentSpeed > 0){
             throw new IllegalStateException("The deck cannot be heightened whilst the vehicle is in motion");
         }
@@ -25,7 +25,7 @@ public class Scania extends Car {
         deckAngleDeg = Math.min(deckAngleDeg + 0.1, 70);
     }
 
-    private void lowerDeck(){
+    public void lowerDeck(){
         deckAngleDeg = Math.max(deckAngleDeg - 0.1, 0);
     }
 
