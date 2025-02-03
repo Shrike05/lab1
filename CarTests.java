@@ -5,17 +5,15 @@ import org.junit.Test;
 
 import java.awt.Color;
 
-public class JUnitTest {
+public class CarTests {
 
     private Volvo240 volvo;
     private Saab95 saab;
-    private Scania scania;
 
     @Before
     public void initCars(){
         volvo = new Volvo240();
         saab = new Saab95();
-        scania = new Scania();
     }
 
     @Test
@@ -98,31 +96,5 @@ public class JUnitTest {
     public void testSpeedFactor(){
         assertEquals(saab.enginePower * 0.01 * (saab.turboOn ? 1.3 : 1), saab.speedFactor(), 0.01);
         assertEquals(volvo.enginePower * 0.01 * Volvo240.trimFactor, saab.speedFactor(), 0.01);
-    }
-
-    @Test
-    public void testDeckHeight(){
-        scania.startEngine();
-
-        assertThrows(IllegalStateException.class, () -> scania.heightenDeck());
-    }
-
-    @Test
-    public void testStartEngineWithHeightenedDeck(){
-        scania.heightenDeck();
-
-        assertThrows(IllegalStateException.class, () -> scania.startEngine());
-    }
-
-    @Test
-    public void testGetDeckAngle(){
-        assertEquals(true, 0 == scania.getDeckAngle());
-    }
-
-    @Test
-    public void testNegativeDeckAngle(){
-        scania.lowerDeck();
-        
-        assertEquals(true, 0 >= scania.getDeckAngle());
     }
 }
