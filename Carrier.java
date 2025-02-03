@@ -36,7 +36,7 @@ public class Carrier extends Truck {
             throw new IllegalStateException("Cannot load a vehicle right now");
         }
 
-        if(car.getClass() == Truck.class){
+        if(car.getClass() == Carrier.class){
             throw new IllegalArgumentException("The Carrier cannot load this vehicle");
         }
 

@@ -76,9 +76,10 @@ public class TruckTests {
     // Bilar kan endast lossas om rampen är nere. De bör då hamna rimligt nära biltransporten.
     @Test
     public void TestCarsUnLoadingWhenRampUp(){
-        carrier.raiseRamp(0);
+        carrier.lowerRamp(0);
         carrier.loadCar(new Saab95());
 
+        carrier.raiseRamp(0);
         assertThrows(IllegalStateException.class, () -> carrier.unloadCar());
     }
 
