@@ -12,9 +12,9 @@ public class Carrier extends Truck {
         rampMinAngleDeg = -45;
 
         nMaxCars = 4;
-        nrDoors = 2;
-        color = Color.red;
-        enginePower = 125;
+        setNrDoors(2);
+        setColor(Color.red);
+        setEnginePower(125);
         modelName = "Saab95";
         stopEngine();
     }
@@ -36,19 +36,15 @@ public class Carrier extends Truck {
     }
 
     public void loadCar(Car car){
-        if(currentSpeed > 0 || rampAngleDeg >= rampMaxAngleDeg){
+        if(getCurrentSpeed() > 0 || rampAngleDeg >= rampMaxAngleDeg){
             throw new IllegalStateException("Cannot load a vehicle right now");
-        }
-
-        if(car instanceof Truck){
-            throw new IllegalArgumentException("The Carrier cannot load this vehicle");
         }
 
         if(carryingCars.size() >= nMaxCars){
             throw new IllegalStateException("This carrier cannot hold more cars");
         }
 
-        if(Math.pow(car.x - x, 2) + Math.pow(car.y - y, 2) > 3){
+        if(Math.pow(car.getX() - getX(), 2) + Math.pow(car.getY() - getY(), 2) > 3){
             throw new IllegalArgumentException("The car is too far away");
         }
 
@@ -56,7 +52,7 @@ public class Carrier extends Truck {
     }
 
     public Car unloadCar(){
-        if(currentSpeed > 0 || rampAngleDeg >= rampMaxAngleDeg){
+        if(getCurrentSpeed() > 0 || rampAngleDeg >= rampMaxAngleDeg){
             throw new IllegalStateException("Cannot unload a vehicle right now");
         }
 
@@ -68,8 +64,8 @@ public class Carrier extends Truck {
         super.move();
 
         for (Car car : carryingCars) {
-            car.x = x;
-            car.y = y;
+            car.setX(getX());
+            car.setY(getY());
         }
     }
 }

@@ -6,9 +6,9 @@ public class Scania extends Truck {
         rampAngleDeg = 0;
         rampMaxAngleDeg = 70;
         rampMinAngleDeg = 0;
-        nrDoors = 2;
-        color = Color.red;
-        enginePower = 125;
+        setNrDoors(2);
+        setColor(Color.red);
+        setEnginePower(125);
         modelName = "Saab95";
         stopEngine();
     }

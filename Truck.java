@@ -1,4 +1,4 @@
-public abstract class Truck extends Car {
+public abstract class Truck extends Vehicle {
     protected double rampAngleDeg;
     protected double rampMaxAngleDeg;
     protected double rampMinAngleDeg;
@@ -8,7 +8,7 @@ public abstract class Truck extends Car {
     }
 
     public void raiseRamp(double angle){
-        if(currentSpeed > 0){
+        if(getCurrentSpeed() > 0){
             throw new IllegalStateException("The ramp cannot be heightened whilst the vehicle is in motion");
         }
 
@@ -16,7 +16,7 @@ public abstract class Truck extends Car {
     }
 
     public void lowerRamp(double angle){
-        if(currentSpeed > 0){
+        if(getCurrentSpeed() > 0){
             throw new IllegalStateException("The ramp cannot be lowered whilst the vehicle is in motion");
         }
 

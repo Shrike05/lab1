@@ -42,36 +42,36 @@ public class CarTests {
 
     @Test
     public void testGasLowers() {
-        double oldVolvoSpeed = volvo.currentSpeed;
+        double oldVolvoSpeed = volvo.getCurrentSpeed();
         volvo.gas(1);
-        assertEquals(true, volvo.currentSpeed >= oldVolvoSpeed);
+        assertEquals(true, volvo.getCurrentSpeed() >= oldVolvoSpeed);
 
-        double oldSaabSpeed = saab.currentSpeed;
+        double oldSaabSpeed = saab.getCurrentSpeed();
         saab.gas(1);
-        assertEquals(true, saab.currentSpeed >= oldSaabSpeed);
+        assertEquals(true, saab.getCurrentSpeed() >= oldSaabSpeed);
     }
 
     @Test
     public void testBrakeHigher() {
-        double oldVolvoSpeed = volvo.currentSpeed;
+        double oldVolvoSpeed = volvo.getCurrentSpeed();
         volvo.brake(1);
-        assertEquals(true, volvo.currentSpeed <= oldVolvoSpeed);
+        assertEquals(true, volvo.getCurrentSpeed() <= oldVolvoSpeed);
 
-        double oldSaabSpeed = saab.currentSpeed;
+        double oldSaabSpeed = saab.getCurrentSpeed();
         saab.brake(1);
-        assertEquals(true, saab.currentSpeed <= oldSaabSpeed);
+        assertEquals(true, saab.getCurrentSpeed() <= oldSaabSpeed);
     }
 
     @Test
     public void testEnginePower(){
-        assertEquals(125, saab.enginePower, 0.001);
-        assertEquals(100, volvo.enginePower, 0.001);
+        assertEquals(125, saab.getEnginePower(), 0.001);
+        assertEquals(100, volvo.getEnginePower(), 0.001);
     }
 
     @Test
     public void testColor(){
-        assertEquals(Color.red, saab.color);
-        assertEquals(Color.black, volvo.color);
+        assertEquals(Color.red, saab.getColor());
+        assertEquals(Color.black, volvo.getColor());
     }
 
     @Test
@@ -79,8 +79,8 @@ public class CarTests {
         saab.setColor(Color.blue);
         volvo.setColor(Color.blue);
 
-        assertEquals(Color.blue, saab.color);
-        assertEquals(Color.blue, volvo.color);
+        assertEquals(Color.blue, saab.getColor());
+        assertEquals(Color.blue, volvo.getColor());
     }
 
     @Test
@@ -88,13 +88,13 @@ public class CarTests {
         saab.startEngine();
         volvo.startEngine();
 
-        assertEquals(0.1, saab.currentSpeed, 0.01);
-        assertEquals(0.1, volvo.currentSpeed, 0.01);
+        assertEquals(0.1, saab.getCurrentSpeed(), 0.01);
+        assertEquals(0.1, volvo.getCurrentSpeed(), 0.01);
     }
 
     @Test
     public void testSpeedFactor(){
-        assertEquals(saab.enginePower * 0.01 * (saab.turboOn ? 1.3 : 1), saab.speedFactor(), 0.01);
-        assertEquals(volvo.enginePower * 0.01 * Volvo240.trimFactor, saab.speedFactor(), 0.01);
+        assertEquals(saab.getEnginePower() * 0.01 * (saab.turboOn ? 1.3 : 1), saab.speedFactor(), 0.01);
+        assertEquals(volvo.getEnginePower() * 0.01 * Volvo240.trimFactor, saab.speedFactor(), 0.01);
     }
 }

@@ -96,8 +96,8 @@ public class TruckTests {
         carrier.lowerRamp(0);
 
         Car car = new Saab95();
-        car.x = 100;
-        car.y = 100;
+        car.setX(100);
+        car.setY(100);
 
         assertThrows(IllegalArgumentException.class, () -> carrier.loadCar(car));
     }
@@ -128,17 +128,6 @@ public class TruckTests {
         assertEquals(car1, carrier.unloadCar());
     }
 
-    // Biltransporten ska inte kunna lasta på en annan biltransport.
-    @Test
-    public void TestCarrierLoadingTruck(){
-        carrier.lowerRamp(0);
-        Carrier otherCarrier = new Carrier();
-        Scania scania = new Scania();
-
-        assertThrows(IllegalArgumentException.class, () -> carrier.loadCar(scania));
-        assertThrows(IllegalArgumentException.class, () -> carrier.loadCar(otherCarrier));
-    }
-
     // Under det att en bil är lastad på biltransporten ska dess position i världen alltid vara densamma som biltransportens position.
     @Test
     public void TestLoadedCarPositions(){
@@ -150,7 +139,7 @@ public class TruckTests {
 
         carrier.move();
 
-        assertEquals(true, Math.abs(carrier.x - car.x) < 0.01);
-        assertEquals(true, Math.abs(carrier.y - car.y) < 0.01);
+        assertEquals(true, Math.abs(carrier.getX() - car.getX()) < 0.01);
+        assertEquals(true, Math.abs(carrier.getY() - car.getY()) < 0.01);
     }
 }
