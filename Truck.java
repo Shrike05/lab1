@@ -22,4 +22,9 @@ public abstract class Truck extends Vehicle {
 
         rampAngleDeg = Math.max(rampAngleDeg - angle, rampMinAngleDeg);
     }
+
+    @Override
+    public double speedFactor(){
+        return getEnginePower() * 0.01;
+    }
 }
