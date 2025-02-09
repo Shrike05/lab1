@@ -6,7 +6,7 @@ public class Vehicle implements Movable{
     private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     public String modelName; // The car model name
-    private double x = 0;
+    private double x = 0; // X position
     private double y = 0;
     private double angle = 0;
     
