@@ -7,7 +7,7 @@ public class Vehicle implements Movable{
     private Color color; // Color of the car
     public String modelName; // The car model name
     private double x = 0; // X position
-    private double y = 0;
+    private double y = 0; // Y position
     private double angle = 0;
     
     public void setNrDoors(int nrDoors){
