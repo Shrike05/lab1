@@ -11,6 +11,31 @@ public abstract class Car implements Movable{
     protected double y = 0;
     protected double angle = 0;
     
+    public void setNrDoors(int nrDoors){
+        this.nrDoors = nrDoors;
+    }
+
+    public void setEnginePower(double enginePower){
+        this.enginePower = enginePower;
+    }
+
+    public void setnrCurrentSpeed(double currentSpeed){
+        this.currentSpeed = currentSpeed;
+    }
+    
+    public void setX(double x){
+        this.x = x;
+    }
+
+    public void setY(double y){
+        this.y = y;
+    }
+
+    public void setAngle(double angle){
+        this.angle = angle;
+    }
+
+
     public int getNrDoors(){
         return nrDoors;
     }

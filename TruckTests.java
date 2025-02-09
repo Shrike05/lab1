@@ -73,6 +73,36 @@ public class TruckTests {
         assertThrows(IllegalStateException.class, () -> carrier.loadCar(new Saab95()));
     }
 
+    @Test
+    public void TestCarsLoadingWhenMoving(){
+        carrier.startEngine();
+
+        assertThrows(IllegalStateException.class, () -> carrier.loadCar(new Saab95()));
+    }
+
+    @Test
+    public void TestCarsLoadingWhenFull(){
+        carrier.lowerRamp(0);
+
+        for(int i = 0; i < carrier.getMaxNCars(); i++){
+            carrier.loadCar(new Saab95());
+        }
+
+        assertThrows(IllegalStateException.class, () -> carrier.loadCar(new Saab95()));
+    }
+
+    @Test
+    public void TestCarsLoadingWhenCarIsFarAway(){
+        carrier.lowerRamp(0);
+
+        Car car = new Saab95();
+        car.x = 100;
+        car.y = 100;
+
+        assertThrows(IllegalArgumentException.class, () -> carrier.loadCar(car));
+    }
+
+
     // Bilar kan endast lossas om rampen är nere. De bör då hamna rimligt nära biltransporten.
     @Test
     public void TestCarsUnLoadingWhenRampUp(){
@@ -100,10 +130,12 @@ public class TruckTests {
 
     // Biltransporten ska inte kunna lasta på en annan biltransport.
     @Test
-    public void TestCarrierLoadingCarrier(){
+    public void TestCarrierLoadingTruck(){
         carrier.lowerRamp(0);
         Carrier otherCarrier = new Carrier();
+        Scania scania = new Scania();
 
+        assertThrows(IllegalArgumentException.class, () -> carrier.loadCar(scania));
         assertThrows(IllegalArgumentException.class, () -> carrier.loadCar(otherCarrier));
     }
 

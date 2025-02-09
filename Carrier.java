@@ -19,6 +19,10 @@ public class Carrier extends Truck {
         stopEngine();
     }
 
+    public int getMaxNCars(){
+        return nMaxCars;
+    }
+
     //Raise it as much as possible
     @Override
     public void raiseRamp(double angle){
@@ -36,7 +40,7 @@ public class Carrier extends Truck {
             throw new IllegalStateException("Cannot load a vehicle right now");
         }
 
-        if(car.getClass() == Carrier.class){
+        if(car instanceof Truck){
             throw new IllegalArgumentException("The Carrier cannot load this vehicle");
         }
 
