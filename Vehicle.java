@@ -1,17 +1,30 @@
 import java.awt.*;
+     
+enum Direction{
+    N,
+    S,
+    W,
+    E
+}
 
 public abstract class Vehicle implements Movable{
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
     private double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
-    public String modelName; // The car model name
+    private String modelName; // The car model name
     private double x = 0; // X position
     private double y = 0; // Y position
-    private double angle = 0;
+    private Direction dir = Direction.N;
+    private int directionIndex = 0;
+    private final Direction[] DIRECTIONS = {Direction.N, Direction.W, Direction.S, Direction.E};
     
     public void setNrDoors(int nrDoors){
         this.nrDoors = nrDoors;
+    }
+
+    public void setModelName(String modelName){
+        this.modelName = modelName;
     }
 
     public void setEnginePower(double enginePower){
@@ -29,11 +42,6 @@ public abstract class Vehicle implements Movable{
     public void setY(double y){
         this.y = y;
     }
-
-    public void setAngle(double angle){
-        this.angle = angle;
-    }
-
 
     public int getNrDoors(){
         return nrDoors;
@@ -97,15 +105,38 @@ public abstract class Vehicle implements Movable{
     }
 
     public void move(){
+        double angle = 0;
+
+        switch (dir) {
+            case Direction.N:
+                angle = Math.PI/2;
+                break;
+            case Direction.S:
+                angle = 3*Math.PI/2;
+                break;
+            case Direction.W:
+                angle = Math.PI;
+                break;
+            case Direction.E:
+                angle = 0;
+                break;
+            default:
+                angle = 0;
+                break;
+        }
+
         x += Math.cos(angle) * currentSpeed;
         y += Math.sin(angle) * currentSpeed;
     }
 
     public void turnLeft(){
-        angle += Math.PI/4;
+        directionIndex += 1;
+        directionIndex %= DIRECTIONS.length;
+        dir = DIRECTIONS[directionIndex];
     }
 
     public void turnRight(){
-        angle -= Math.PI/4;
+        directionIndex = directionIndex == 0 ? DIRECTIONS.length-1 : directionIndex - 1;
+        dir = DIRECTIONS[directionIndex];
     }
 }

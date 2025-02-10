@@ -9,7 +9,7 @@ public class Scania extends Truck {
         setNrDoors(2);
         setColor(Color.red);
         setEnginePower(125);
-        modelName = "Saab95";
+        setModelName("Saab95");
         stopEngine();
     }
     
