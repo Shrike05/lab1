@@ -50,10 +50,10 @@ public class TruckTests {
     // Biltransportens ramp har endast två lägen, uppe eller nere.
     @Test
     public void testCarrierRampStates(){
-        carrier.lowerRamp(0);
+        carrier.lowerRamp();
         assertEquals(true, carrier.getRampAngle() - carrier.rampMinAngleDeg < 0.01);
 
-        carrier.raiseRamp(0);
+        carrier.raiseRamp();
         assertEquals(true, carrier.getRampAngle() - carrier.rampMaxAngleDeg < 0.01);
     }
 
@@ -62,13 +62,13 @@ public class TruckTests {
     public void testRampCannotLowerInMotion(){
         carrier.startEngine();
 
-        assertThrows(IllegalStateException.class, () -> carrier.lowerRamp(0));
+        assertThrows(IllegalStateException.class, () -> carrier.lowerRamp());
     }
 
     // Bilar kan endast lastas om rampen är nere, och de befinner sig rimligt nära biltransporten (gör ett eget antagande, de exakta detaljerna är inte viktiga).
     @Test
     public void TestCarsLoadingWhenRampUp(){
-        carrier.raiseRamp(0);
+        carrier.raiseRamp();
 
         assertThrows(IllegalStateException.class, () -> carrier.loadCar(new Saab95()));
     }
@@ -82,7 +82,7 @@ public class TruckTests {
 
     @Test
     public void TestCarsLoadingWhenFull(){
-        carrier.lowerRamp(0);
+        carrier.lowerRamp();
 
         for(int i = 0; i < carrier.getMaxNCars(); i++){
             carrier.loadCar(new Saab95());
@@ -93,7 +93,7 @@ public class TruckTests {
 
     @Test
     public void TestCarsLoadingWhenCarIsFarAway(){
-        carrier.lowerRamp(0);
+        carrier.lowerRamp();
 
         Car car = new Saab95();
         car.setX(100);
@@ -106,17 +106,17 @@ public class TruckTests {
     // Bilar kan endast lossas om rampen är nere. De bör då hamna rimligt nära biltransporten.
     @Test
     public void TestCarsUnLoadingWhenRampUp(){
-        carrier.lowerRamp(0);
+        carrier.lowerRamp();
         carrier.loadCar(new Saab95());
 
-        carrier.raiseRamp(0);
+        carrier.raiseRamp();
         assertThrows(IllegalStateException.class, () -> carrier.unloadCar());
     }
 
     // Bilar kan endast lossas i omvänd ordning från hur de lastades, dvs den sista bilen som lastades måste vara först att lossas (first-in-last-out).
     @Test
     public void TestUnloadingOrder(){
-        carrier.lowerRamp(0);
+        carrier.lowerRamp();
 
         Car car1 = new Saab95();
         Car car2 = new Volvo240();
@@ -131,7 +131,7 @@ public class TruckTests {
     // Under det att en bil är lastad på biltransporten ska dess position i världen alltid vara densamma som biltransportens position.
     @Test
     public void TestLoadedCarPositions(){
-        carrier.lowerRamp(0);
+        carrier.lowerRamp();
 
         Car car = new Saab95();
 

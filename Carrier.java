@@ -24,15 +24,21 @@ public class Carrier extends Truck {
     }
 
     //Raise it as much as possible
-    @Override
-    public void raiseRamp(double angle){
-        super.raiseRamp(Double.MAX_VALUE);
+    public void raiseRamp(){
+        if(getCurrentSpeed() > 0){
+            throw new IllegalStateException("The ramp cannot be heightened whilst the vehicle is in motion");
+        }
+        
+        rampAngleDeg = rampMaxAngleDeg;
     }
 
     //Lower it as much as possible
-    @Override
-    public void lowerRamp(double angle){
-        super.lowerRamp(Double.MAX_VALUE);
+    public void lowerRamp(){
+        if(getCurrentSpeed() > 0){
+            throw new IllegalStateException("The ramp cannot be lowered whilst the vehicle is in motion");
+        }
+
+        rampAngleDeg = rampMinAngleDeg;
     }
 
     public void loadCar(Car car){
