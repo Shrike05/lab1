@@ -37,31 +37,31 @@ public class TruckTests {
 
     @Test
     public void testGetRampAngle(){
-        assertEquals(true, 0 == scania.getRampAngle());
+        assertEquals(true, 0 == scania.getRamp().getRampAngle());
     }
 
     @Test
     public void testNegativeRampAngle(){
         scania.lowerRamp(1);
         
-        assertEquals(true, scania.getRampAngle() >= 0);
+        assertEquals(true, scania.getRamp().getRampAngle() >= 0);
     }
 
     // Biltransportens ramp har endast två lägen, uppe eller nere.
     @Test
     public void testCarrierRampStates(){
         carrier.lowerRamp();
-        assertEquals(true, carrier.getRampAngle() - carrier.rampMinAngleDeg < 0.01);
+        assertEquals(true, carrier.getRamp().getRampAngle() - carrier.getRamp().getMinRampAngle() < 0.01);
 
         carrier.raiseRamp();
-        assertEquals(true, carrier.getRampAngle() - carrier.rampMaxAngleDeg < 0.01);
+        assertEquals(true, carrier.getRamp().getRampAngle() - carrier.getRamp().getMaxRampAngle() < 0.01);
     }
 
     // Rampen kan endast vara nere om biltransporten står stilla.
     @Test
     public void testRampCannotLowerInMotion(){
         carrier.startEngine();
-
+        
         assertThrows(IllegalStateException.class, () -> carrier.lowerRamp());
     }
 

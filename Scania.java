@@ -2,10 +2,11 @@ import java.awt.*;
 
 public class Scania extends Truck {
 
+    private Ramp ramp;
+
     public Scania(){
-        rampAngleDeg = 0;
-        rampMaxAngleDeg = 70;
-        rampMinAngleDeg = 0;
+        ramp = new Ramp(0, 70, 0);
+
         setNrDoors(2);
         setColor(Color.red);
         setEnginePower(125);
@@ -13,12 +14,16 @@ public class Scania extends Truck {
         stopEngine();
     }
 
+    public Ramp getRamp(){
+        return ramp;
+    }
+
     public void raiseRamp(double angle){
         if(getCurrentSpeed() > 0){
             throw new IllegalStateException("The ramp cannot be heightened whilst the vehicle is in motion");
         }
 
-        rampAngleDeg = Math.min(rampAngleDeg + angle, rampMaxAngleDeg);
+        ramp.setRampAngle(angle);
     }
 
     public void lowerRamp(double angle){
@@ -26,11 +31,11 @@ public class Scania extends Truck {
             throw new IllegalStateException("The ramp cannot be lowered whilst the vehicle is in motion");
         }
 
-        rampAngleDeg = Math.max(rampAngleDeg - angle, rampMinAngleDeg);
+        ramp.setRampAngle(angle);
     }
     
     public void startEngine(){
-        if(rampAngleDeg > 0){
+        if(ramp.getRampAngle() > 0){
             throw new IllegalStateException("Cannot start the car whilst the ramp is heightened");
         }
 

@@ -2,14 +2,13 @@ import java.awt.*;
 import java.util.Stack;
 
 public class Carrier extends Truck {
+    private Ramp ramp;
     private int nMaxCars;
     private Stack<Car> carryingCars;
 
     public Carrier(){
         carryingCars = new Stack<Car>();
-        rampAngleDeg = 0;
-        rampMaxAngleDeg = 0;
-        rampMinAngleDeg = -45;
+        ramp = new Ramp(0, 0, -45);
 
         nMaxCars = 4;
         setNrDoors(2);
@@ -17,6 +16,10 @@ public class Carrier extends Truck {
         setEnginePower(125);
         setModelName("Saab95");
         stopEngine();
+    }
+
+    public Ramp getRamp(){
+        return ramp;
     }
 
     public int getMaxNCars(){
@@ -29,7 +32,7 @@ public class Carrier extends Truck {
             throw new IllegalStateException("The ramp cannot be heightened whilst the vehicle is in motion");
         }
         
-        rampAngleDeg = rampMaxAngleDeg;
+        ramp.setRampAngle(ramp.getMaxRampAngle());
     }
 
     //Lower it as much as possible
@@ -38,11 +41,11 @@ public class Carrier extends Truck {
             throw new IllegalStateException("The ramp cannot be lowered whilst the vehicle is in motion");
         }
 
-        rampAngleDeg = rampMinAngleDeg;
+        ramp.setRampAngle(ramp.getMinRampAngle());
     }
 
     public void loadCar(Car car){
-        if(getCurrentSpeed() > 0 || rampAngleDeg >= rampMaxAngleDeg){
+        if(getCurrentSpeed() > 0 || ramp.getRampAngle() >= ramp.getMaxRampAngle()){
             throw new IllegalStateException("Cannot load a vehicle right now");
         }
 
@@ -58,7 +61,7 @@ public class Carrier extends Truck {
     }
 
     public Car unloadCar(){
-        if(getCurrentSpeed() > 0 || rampAngleDeg >= rampMaxAngleDeg){
+        if(getCurrentSpeed() > 0 || ramp.getRampAngle() >= ramp.getMaxRampAngle()){
             throw new IllegalStateException("Cannot unload a vehicle right now");
         }
 
